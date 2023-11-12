@@ -1,0 +1,22 @@
+/* RichTextEditor.css */
+.rich-text-editor {
+    width: 500px;
+    margin: auto;
+  }
+  
+  .toolbar {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  
+  .toolbar button {
+    margin-right: 8px;
+  }
+  
+  .editor {
+    border: 1px solid #ccc;
+    padding: 8px;
+    min-height: 200px;
+    font-size: 16px;
+  }
+  

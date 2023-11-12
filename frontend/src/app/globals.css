@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color : #0B0c10;
+  --secondary-color : #1f2833;
+  --third-color : #C5c6c7 ;
+  --text-color : #66fcf1 ;
+  --fifth-color : #45a29e;
+}
+
+html {
+  background: var(--primary-color);
+  color: var(--text-color);
+}
+li {
+  list-style: none;
+}
