@@ -13,25 +13,6 @@ const post_img =
   "https://github-production-user-asset-6210df.s3.amazonaws.com/86356896/282035691-7988448f-bb09-4ad4-bc2e-3482bcefb78f.jpg";
 
 
-interface SidenavProps {
-  imgUrl: string;
-  title: string;
-  postId: string;
-}
-
-const AsideNav: React.FC<SidenavProps> = ({ postId, imgUrl, title }) => {
-  return (
-    <Link
-      href={`post/${postId}`}
-      className="flex space-x-4 border-b-[1px] border-white pb-2"
-    >
-      <img src={imgUrl} alt="" className="w-28" />
-      <div>
-        <h5 className="line_clamp_3">{title}</h5>
-      </div>
-    </Link>
-  );
-};
 
 const RecentPosts = () => {
 //   const [posts, setPosts] = useState([]);

@@ -5,7 +5,7 @@ import {
 } from "../controllers/authControllers";
 const router = express.Router();
 
-router.get("/login/oauth", googleOAuthRedirect);
+router.get("/google", googleOAuthRedirect);
 router.get("/google/callback",googleOAuthCallback);
 router.get('/checklogin');
 

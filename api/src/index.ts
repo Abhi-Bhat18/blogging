@@ -1,34 +1,37 @@
 import express, { Request, Response } from "express";
-import dotnev from 'dotenv'
+import dotnev from "dotenv";
 
-dotnev.config()
+import ConnectDB from "./config/db.ts";
+import authRoutes from "./routes/authRoutes.ts";
+import blogRoutes from './routes/blogRotues.ts';
 
-console.log("Env",process.env.NODE_ENV)
+
+dotnev.config();
 const port = process.env.PORT || 1337;
 
-const app = express();
+const Server = async () => {
+  const app = express();
 
+  await ConnectDB();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
+  //Routes
+  app.use("/api/v1/auth", authRoutes);
+  app.use('/api/v1/blog',blogRoutes);
 
-app.get("/", (req: Request, res: Response) => {
-  console.log(req.url);
-
-  return res.send("Hello world server is up and running");
-});
-app.get('/check',(req : Request,res : Response) => {
-  try {
-
+  app.get("/check", (req: Request, res: Response) => {
     return res.json({
-      success : true
-    })
-    
-  } catch (error) {
-    console.log("Err",error);
+      success: true,
+    });
+  });
 
-    return res.status(500).json( {
-      success : false,
-      message : "something went wrong"
-     })
-  }
-})
-app.listen(1337, () => console.log("Server is listening at port 1337"));
+  return app;
+};
+
+Server().then((app) => {
+  app.listen(port, () => console.log(`server listening at port ${port}`));
+});
+
+export default Server;
+

@@ -7,7 +7,10 @@ export const getBlogs = async (req: Request, res: Response) => {
   const limit = req.query.limit ? req.query.limit : 10;
 
   try {
-  } catch (error) {}
+  } catch (error) {
+
+
+  }
 };
 
 export const getABlog = async (req: Request, res: Response) => {
@@ -30,5 +33,27 @@ export const commentOnABlog = async (req: Request, res: Response) => {};
 
 export const likeABlog = async (req: Request, res: Response) => {
   try {
-  } catch (error) {}
+
+
+  } catch (error) {
+
+
+  }
 };
+
+
+export const writeBlog = async (req: Request, res: Response) => {
+  
+}
+
+export const editBlog =async (req : Request, res : Response) => {
+  
+}
+
+export const deleteBlog =async (req : Request, res : Response) => {
+  
+}
+
+export const searchBlogs =async (req : Request, res : Response) => {
+  
+}

@@ -9,6 +9,7 @@ const michroma = Michroma({
 });
 
 import { posts, Post } from "@/static/postsdata";
+import RecommendationCard from "../components/Blogs/AsideRecommendation";
 interface PostCardProps {
   imgUrl: string;
   metaDesc: string;
@@ -22,10 +23,7 @@ const PostCards: React.FC<PostCardProps> = ({
   postId,
 }) => {
   return (
-    <Link
-      href={""}
-      className="flex m-5 bg-gray-900 justify-center rounded-md"
-    >
+    <Link href={""} className="flex m-5 bg-gray-900 justify-center rounded-md">
       <div className="basis-[40%]">
         <img
           className="object-cover w-full h-[250px] rounded-t-lg md:rounded-none md:rounded-l-lg"
@@ -57,9 +55,9 @@ const Blogs = () => {
   return (
     <div className="text-white max-w-7xl space-y-10 lg:space-y-0 mx-auto my-10 py-5">
       <div className="flex space-x-5 py-10">
-        <section className="basis-3/4">
+        <section className="basis-3/4 space-y-5">
           <h2
-            className={`w-full ${michroma.className} text-center text-3xl underline font-bold font-space`}
+            className={`w-full ${michroma.className} text-center text-3xl  font-bold font-space`}
           >
             Catch our latest blogs
           </h2>
@@ -75,8 +73,16 @@ const Blogs = () => {
             );
           })}
         </section>
-        <section className="basis-1/4">
-          <div>Recommendation</div>
+        <section className="basis-1/4 space-y-5 h-full sticky top-16">
+          <h3 className="py-[6px]">You might like this</h3>
+          {posts.map((post, index: number) => (
+            <RecommendationCard
+              key={index}
+              imgUrl={post.imgUrl}
+              postId={"80"}
+              title={post.title}
+            />
+          ))}
         </section>
       </div>
     </div>
