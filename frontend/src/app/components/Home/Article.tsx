@@ -16,6 +16,7 @@ interface Props {
   postId: string;
 }
 import blog_url from "../../../../public/dan-lefebvre-RfUy0XMCkhQ-unsplash.jpg";
+import { useRouter } from "next/navigation";
 
 const img =
   "https://unsplash.com/photos/black-computer-keyboard-on-brown-wooden-desk-RfUy0XMCkhQ";
@@ -27,12 +28,15 @@ const Article: React.FC<Props> = ({
   content,
   postId,
 }) => {
+
+  const router = useRouter();
+
   return (
     <article
       className={`flex flex-col lg:flex-row bg-black ${dm.className} text-white`}
     >
       <div className="p-5 text-left lg:flex-[0.5] space-y-5">
-        <h2 className="text-2xl">
+        <h2 className="text-2xl" onClick={() => router.push("/blogs")}>
           The Ultimate Guide on How to Become a Software Developer
         </h2>
         <p className="mb-3 font-light leading-7 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold dark:first-letter:text-gray-100 first-letter:mr-3 first-letter:float-left text-base">

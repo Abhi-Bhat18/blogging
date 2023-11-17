@@ -4,11 +4,11 @@ import User from "../models/userSchema.ts";
 import { generateToken } from "../utils/generator.ts";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
-console.log("client Id",process.env.OAUTH_CLIENT_ID as string)
+console.log("client Id", process.env.OAUTH_CLIENT_ID as string);
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.OAUTH_CLIENT_ID as string,
@@ -63,23 +63,27 @@ export const googleOAuthCallback = async (req: Request, res: Response) => {
 
     // if user already exists then generate the token and login
     if (userExist) {
-      const token = generateToken(userExist._id, userExist.email);
+      const token = generateToken(
+        userExist._id,
+        userExist.email,
+        userExist.role
+      );
       res.cookie("__$a_t", token, {
         httpOnly: true,
       });
       return res.redirect("http://localhost:3000/");
     }
 
-    console.log(profile.data.given_name,profile.data.family_name);
+    console.log(profile.data.given_name, profile.data.family_name);
     // Create the user in DB
     const user = await User.create({
-      firstName : profile.data.given_name,
-      lastName : profile.data.family_name,
+      firstName: profile.data.given_name,
+      lastName: profile.data.family_name,
       email: profile.data.email,
       imgUrl: profile.data.picture,
     });
 
-    const token = generateToken(user._id, user.email);
+    const token = generateToken(user._id, user.email, user.role);
     res.cookie("__$a_t", token, {
       httpOnly: true,
     });

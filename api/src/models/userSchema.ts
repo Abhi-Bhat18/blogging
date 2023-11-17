@@ -15,11 +15,17 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    password : {
-      type : String,
+    password: {
+      type: String,
     },
     imgUrl: {
       type: String,
+    },
+    role: {
+      type: String,
+      enum: ["USER", "WRITER", "ADMIN"],
+      required: true,
+      default: "USER",
     },
     blogs: [
       {
@@ -33,4 +39,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model('User',userSchema);
+export default mongoose.model("User", userSchema);

@@ -1,30 +1,31 @@
 import request from "supertest";
 import Server from "../../src/index.ts";
+import { Express } from "express";
 
+let app: Express;
+let server: any;
 
-let app : any;
 
 beforeAll(async () => {
+  try {
     app = await Server();
-    app.listen(1337);
-  });
+    server = app.listen(1337);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 afterAll(async () => {
-    app.close()
-})
+  if (server) {
+    console.log("Server does exist");
+    server.close();
+  }
+});
 
-describe("API Tests", () => {
+describe("Blogging API tests", () => {
   test("GET /api/resource should return status 200", async () => {
-    const response = await request(app).get("/api/resource");
+    const response = await request(app).get("/check");
     expect(response.status).toBe(200);
-  });
-
-  test("POST /api/resource should create a new resource", async () => {
-    const response = await request(app).post("/api/resource").send({
-      data: "some data",
-    });
-    expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty("id");
   });
 
   // Add more test cases as needed

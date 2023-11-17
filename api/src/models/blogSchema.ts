@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { deleteModel } from "mongoose";
 
 const blogSchema = new mongoose.Schema(
   {
@@ -24,9 +24,27 @@ const blogSchema = new mongoose.Schema(
     },
     comments: [
       {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Comment",
+        commentBy: {
+          type: mongoose.SchemaTypes.ObjectId,
+          ref: "User",
+          required: true,
+        },
+        comment: {
+          type: String,
+          required: true,
+        },
+        commentedOn : {
+          type : String,
+          default : new Date(),
+          required : true
+        }
       },
+    ],
+    tags : [
+      {
+        type : String,
+        required : true
+      }
     ],
     likes: [
       {
@@ -34,23 +52,16 @@ const blogSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    likeCount: {
-      type: Number,
-      required: true,
-      default: 0,
-      min: 0,
-    },
     disLikes: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
     },
-    disLikeCount: {
-      type: Number,
-      required: true,
-      default: 0,
-      min: 0,
+    deleted: {
+      type: Boolean,
+      default: false,
     },
   },
+
   {
     timestamps: true,
   }
