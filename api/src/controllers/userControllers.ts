@@ -38,3 +38,23 @@ export const viewUserProfile = async (req: Request, res: Response) => {
     });
   }
 };
+
+/**
+ * Subscribes the user to the newsletter.
+ *
+ * @param {Request} req - the request object
+ * @param {Response} res - the response object
+ * @return {Promise<void>} - a promise that resolves when the subscription is complete
+ */
+export const subscribeToNewsLetter =async (req: Request, res : Response) => {
+    try {
+      
+      console.log('user');
+
+      const subscribe = await User.findByIdAndUpdate(req.user?._id, {
+        
+      })
+    } catch (error) {
+      
+    }
+}
